@@ -1,7 +1,7 @@
 import { db } from '$lib/server/db';
 import { colaborador } from '$lib/server/schema';
 import type { NewColaboradorType } from '$lib/server/schema/schema';
-import { processColaboradorForm } from '../validityColaboradorForm';
+import { processColaboradorForm } from '../validityCategoriaForm';
 import type { PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 

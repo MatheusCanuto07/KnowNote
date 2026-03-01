@@ -1,19 +1,18 @@
 <script lang="ts">
   import { applyAction, enhance } from '$app/forms';
   import { showToast } from '$lib/components/toast/toastStore';
-  import { type NewColaboradorType } from '$lib/server/schema/schema';
+  import { type NewCategoriaType } from '$lib/server/schema/schema';
   import { goto } from '$app/navigation';
   import UpdatedBy from '$lib/components/UpdatedBy.svelte';
-  import { formatPhone } from '$lib/client/utils/mask';
 
-  type FormErrors = Partial<Record<keyof NewColaboradorType, string>>;
+  type FormErrors = Partial<Record<keyof NewCategoriaType, string>>;
 
   let {
     entidade = null,
     // Permite atualizar o valor da props dentro do componente
     errors = $bindable({})
   }: {
-    entidade: NewColaboradorType | null;
+    entidade: NewCategoriaType | null;
     errors?: FormErrors;
   } = $props();
 
@@ -33,8 +32,8 @@
 
     return async ({ result, update }) => {
       if (result.status === 200) {
-        showToast(`${isNew ? "Membro da equipe cadastrado" : "Membro da equipe atualizado"} com sucesso!`, "success");
-        goto("/home/equipe");
+        showToast(`${isNew ? "Categoria cadastrada" : "Categoria atualizada"} com sucesso!`, "success");
+        goto("/home/categoria");
       } else {
         await applyAction(result);
 
@@ -56,7 +55,7 @@
   }}
 >
   <div class="w-full flex justify-between">
-    <h1 class="text-2xl font-bold mb-1">{isNew ? "Adicionar" : "Editar"} Membro da equipe</h1>
+    <h1 class="text-2xl font-bold mb-1">{isNew ? "Adicionar" : "Editar"} Categoria</h1>
     {#if !isNew}
       <UpdatedBy
         createdBy={entidade?.createdBy ?? 'N/A'}
@@ -73,7 +72,7 @@
       <span class="label-text">Nome <span class="text-red-500">*</span></span>
     </label>
     <input 
-      placeholder="Nome do membro da equipe"
+      placeholder="Nome da categoria"
       type="text"
       id="name"
       name="name"
@@ -82,28 +81,6 @@
     >
     {#if errors?.name}
       <span class="text-error text-sm">{errors.name}</span>
-    {/if}
-  </div>
-
-  
-  <div class="w-full md:w-5/12 pr-5">
-    <label for="phoneNumber" class="label">
-      <span class="label-text">Telefone <span class="text-red-500">*</span></span>
-    </label>
-    <input
-      placeholder="Número de telefone"
-      type="text"
-      id="phoneNumber"
-      name="phoneNumber"
-      class="input input-bordered w-full {errors?.phoneNumber ? 'input-error' : ''}"
-      value={entidade?.phoneNumber ? formatPhone(entidade?.phoneNumber) : ''}
-      oninput={(e) => {
-        const input = e.currentTarget;
-        input.value = formatPhone(input.value);
-      }}
-    >
-    {#if errors?.phoneNumber}
-      <p class="text-error text-sm">Telefone inválido</p>
     {/if}
   </div>
 

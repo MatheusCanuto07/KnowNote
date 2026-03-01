@@ -6,7 +6,7 @@ import {
 } from "$lib/server/schema/schema";
 import { eq } from "drizzle-orm";
 import { fail } from "@sveltejs/kit";
-import { processColaboradorForm } from "../validityColaboradorForm";
+import { processColaboradorForm } from "../validityCategoriaForm";
 
 export const load = (async ({ params, locals }) => {
   if (!params.id) {

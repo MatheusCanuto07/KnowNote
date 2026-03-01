@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ActionData } from './$types';
-  import ColaboradorForm from '$lib/components/form/ColaboradorForm.svelte';
+  import ColaboradorForm from '$lib/components/form/CategoriaForm.svelte';
   import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 
   let { form, data } = $props();

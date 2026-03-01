@@ -6,5 +6,5 @@ export {
 } from './auth-schema';
 
 export {
-  categoria,
+  categoriaTable as categoria,
 } from './schema';

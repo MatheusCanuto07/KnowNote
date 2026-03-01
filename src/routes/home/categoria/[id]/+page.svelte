@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ColaboradorForm from '$lib/components/form/ColaboradorForm.svelte';
+  import ColaboradorForm from '$lib/components/form/CategoriaForm.svelte';
   import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
 
   let { data } = $props();
