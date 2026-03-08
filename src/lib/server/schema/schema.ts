@@ -37,6 +37,7 @@ export const textTable = sqliteTable("text", {
   name : text("name").notNull(),
   content: text("content").notNull(),
 
+  active: integer("active", { mode: "boolean" }).default(true).notNull(),
   idCategory : integer("idCategory").references(() => categoryTable.id, { onDelete: "cascade" }).notNull(),
   idUser: integer("idUser").notNull(),
   createdAt: integer("createdAt", { mode: "timestamp_ms" }).notNull(),

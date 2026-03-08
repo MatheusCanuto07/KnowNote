@@ -29,6 +29,9 @@ export const load = (async ({url}) => {
       and(
         themeFiltered ? eq(themeTable.id, parseInt(themeFiltered)) : undefined,
         categoryFiltered ? eq(categoryTable.id, parseInt(categoryFiltered)) : undefined,
+        eq(themeTable.active, true),
+        eq(categoryTable.active, true),
+        eq(textTable.active, true),
       ),
     )
     .orderBy(categoryTable.id, textTable.id);

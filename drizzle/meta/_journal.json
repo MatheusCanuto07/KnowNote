@@ -36,6 +36,13 @@
       "when": 1772938236909,
       "tag": "0004_superb_zarda",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1772982195451,
+      "tag": "0005_superb_mantis",
+      "breakpoints": true
     }
   ]
 }
