@@ -34,8 +34,10 @@ export type NewCategoryType = InferInsertModel<typeof categoryTable>;
 
 export const textTable = sqliteTable("text", {
   id: integer({ mode: "number" }).primaryKey({ autoIncrement: true }),
+  name : text("name").notNull(),
   content: text("content").notNull(),
 
+  idCategory : integer("idCategory").references(() => categoryTable.id, { onDelete: "cascade" }).notNull(),
   idUser: integer("idUser").notNull(),
   createdAt: integer("createdAt", { mode: "timestamp_ms" }).notNull(),
   updatedAt: integer("updatedAt", { mode: "timestamp_ms" }),

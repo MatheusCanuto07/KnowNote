@@ -11,4 +11,4 @@
   { href: `/home/categoria/${data.category?.id}`, label: data.category?.name ?? '' }
 ]} />
 
-<CategoryForm entidade={data.category ?? null}/>
+<CategoryForm themes={data.themes ?? []} entidade={data.category ?? null}/>

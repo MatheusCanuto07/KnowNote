@@ -1,0 +1,1 @@
+ALTER TABLE `category` ADD `idTheme` integer NOT NULL REFERENCES theme(id);

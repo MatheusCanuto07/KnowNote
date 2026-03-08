@@ -84,7 +84,7 @@
 
   <div class="w-full md:w-4/12 pr-5">
     <label for="description" class="label">
-      <span class="label-text">Descricao <span class="text-red-500">*</span></span>
+      <span class="label-text">Descricao</span>
     </label>
     <input
       placeholder="Descricao da categoria"
