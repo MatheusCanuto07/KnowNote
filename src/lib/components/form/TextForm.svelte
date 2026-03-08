@@ -25,12 +25,14 @@
     errors?: FormErrors;
   } = $props();
 
-  let isNew = entidade === null;
+  let entidadeSnapshot = $state.snapshot(entidade);
+
+  let isNew = entidadeSnapshot === null;
   let isLoading = $state(false);
 
   let editorElement: HTMLElement;
   let editor: Editor;
-  let content = $state(entidade?.content ?? "");
+  let content = $state(entidadeSnapshot?.content ?? "");
 
   onMount(() => {
     editor = new Editor({

@@ -6,7 +6,7 @@ export default defineConfig({
   schema: "./src/lib/server/schema/index.ts",
   dialect: "turso",
   dbCredentials: {
-    authToken: process.env.TURSO_AUTH_TOKEN,
+    // authToken: process.env.TURSO_AUTH_TOKEN,
     url: process.env.TURSO_DATABASE_URL,
   },
   verbose: true,
