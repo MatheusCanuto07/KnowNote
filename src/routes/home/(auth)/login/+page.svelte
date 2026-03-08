@@ -3,7 +3,7 @@
   import type { PageProps } from "./$types";
   import { showToast } from "$lib/components/toast/toastStore";
   import Toast from "$lib/components/toast/Toast.svelte";
-  import { authClient } from "$lib/auth-client";
+  import { authClient } from "$lib/auth/auth-client";
 
   let isLoading = $state(false);
   let isError = $state(false);
