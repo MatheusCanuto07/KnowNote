@@ -1,38 +1,37 @@
 import { db } from '$lib/server/db';
-import { categoryTable, themeTable } from '$lib/server/schema';
-import type { NewCategoryType } from '$lib/server/schema/schema';
-import { processCategoryForm } from '../validityCategoryForm';
+import { themeTable } from '$lib/server/schema';
+import type { NewThemeType } from '$lib/server/schema/schema';
+import { processThemeForm } from '../validityThemeForm';
 import type { PageServerLoad } from './$types';
 import { fail } from '@sveltejs/kit';
 
 export const load = (async () => {
-  const [themes] = await Promise.all([db.select().from(themeTable)]);
-  return {
-    themes
-  };
+  return {};
 }) satisfies PageServerLoad;
 
 export const actions = {
   default: async ({ request, locals }) => {
-    const result = await processCategoryForm(request);
+    const result = await processThemeForm(request);
 
     if (!result.success) {
       return fail(422, { success: false, errors: result.errors });
     }
 
+    console.log(result)
+
     try {
-      let insertedNewCategory : NewCategoryType = {
+      let insertedNewTheme : NewThemeType = {
         ...result.data,
         idUser: 1,
         createdAt : new Date(),
       }
-      await db.insert(categoryTable).values(insertedNewCategory);
+      await db.insert(themeTable).values(insertedNewTheme);
       return { success: true };
     } catch (e) {
       console.log(e);
       return fail(400, {
         success: false,
-        exception: "Ocorreu uma excecao nao tratada, favor contatar o suporte.",
+        exception: "Ocorreu uma exceção não tratada, favor contatar o suporte.",
       });
     }
   }

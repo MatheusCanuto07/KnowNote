@@ -6,10 +6,10 @@
   let isOpen = $state(false);
 
   let telas = [
-    { label: "Tema",      url: "/tema",      Icon: Palette  },
-    { label: "Categoria", url: "/categoria", Icon: Tag      },
-    { label: "Texto",     url: "/texto",     Icon: FileText },
-    { label: "Configurações", url: "/configuracoes", Icon: Settings },
+    { label: "Tema",          url: "tema",          Icon: Palette  },
+    { label: "Categoria",     url: "categoria",     Icon: Tag      },
+    { label: "Texto",         url: "texto",         Icon: FileText },
+    { label: "Configurações", url: "configuracoes", Icon: Settings },
   ];
 </script>
 

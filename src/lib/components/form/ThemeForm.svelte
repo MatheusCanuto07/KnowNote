@@ -1,18 +1,18 @@
 <script lang="ts">
   import { applyAction, enhance } from '$app/forms';
   import { showToast } from '$lib/components/toast/toastStore';
-  import { type NewCategoriaType } from '$lib/server/schema/schema';
+  import { type NewThemeType } from '$lib/server/schema/schema';
   import { goto } from '$app/navigation';
   import UpdatedBy from '$lib/components/UpdatedBy.svelte';
 
-  type FormErrors = Partial<Record<keyof NewCategoriaType, string>>;
+  type FormErrors = Partial<Record<keyof NewThemeType, string>>;
 
   let {
     entidade = null,
     // Permite atualizar o valor da props dentro do componente
     errors = $bindable({})
   }: {
-    entidade: NewCategoriaType | null;
+    entidade: NewThemeType | null;
     errors?: FormErrors;
   } = $props();
 
@@ -22,7 +22,7 @@
 
 <form 
   method="POST" 
-  class="w-full flex flex-wrap bg-white p-6 rounded-xl shadow-md mb-10"
+  class="w-full flex flex-wrap p-6 rounded-xl shadow-md mb-10"
   use:enhance={({ cancel }) => {
     if (isLoading) {
       cancel();
@@ -32,8 +32,8 @@
 
     return async ({ result, update }) => {
       if (result.status === 200) {
-        showToast(`${isNew ? "Categoria cadastrada" : "Categoria atualizada"} com sucesso!`, "success");
-        goto("/home/categoria");
+        showToast(`${isNew ? "Tema cadastrado" : "Tema atualizado"} com sucesso!`, "success");
+        goto("/home/tema");
       } else {
         await applyAction(result);
 
@@ -55,32 +55,46 @@
   }}
 >
   <div class="w-full flex justify-between">
-    <h1 class="text-2xl font-bold mb-1">{isNew ? "Adicionar" : "Editar"} Categoria</h1>
+    <h1 class="text-2xl font-bold mb-1">{isNew ? "Adicionar" : "Editar"} Tema</h1>
     {#if !isNew}
       <UpdatedBy
-        createdBy={entidade?.createdBy ?? 'N/A'}
         createdAt={entidade?.createdAt ? new Date(entidade?.createdAt.getTime() / 1000).toLocaleString() : 'N/A'}
-        updatedBy={entidade?.updatedBy ?? 'N/A'}
-        updatedAt={!entidade?.updatedBy ? 'N/A' : entidade?.updatedAt ? new Date(entidade?.updatedAt).toLocaleString() : 'N/A'}
+        updatedAt={entidade?.updatedAt ? new Date(entidade?.updatedAt).toLocaleString() : 'N/A'}
       />
     {/if}
   </div>
   <div class="w-full divider"></div>
   <input type="hidden" name="id" value={entidade?.id ?? ''} />
+
   <div class="w-full md:w-5/12 pr-5">
     <label for="name" class="label">
       <span class="label-text">Nome <span class="text-red-500">*</span></span>
     </label>
     <input 
-      placeholder="Nome da categoria"
+      placeholder="Nome do tema"
       type="text"
       id="name"
       name="name"
       class="input input-bordered w-full {errors?.name ? 'input-error' : ''}"
-      value={entidade?.name ?? ''}
-    >
+      value={entidade?.name ?? ''}>
     {#if errors?.name}
       <span class="text-error text-sm">{errors.name}</span>
+    {/if}
+  </div>
+
+  <div class="w-full md:w-5/12 pr-5">
+    <label for="description" class="label">
+      <span class="label-text">Descrição <span class="text-red-500">*</span></span>
+    </label>
+    <input 
+      placeholder="Descrição do tema"
+      type="text"
+      id="description"
+      name="description"
+      class="input input-bordered w-full {errors?.description ? 'input-error' : ''}"
+      value={entidade?.description ?? ''}>
+    {#if errors?.description}
+      <span class="text-error text-sm">{errors.description}</span>
     {/if}
   </div>
 

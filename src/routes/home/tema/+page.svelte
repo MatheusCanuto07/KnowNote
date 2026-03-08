@@ -10,8 +10,8 @@
   import Actions from "$lib/components/Actions.svelte";
 
   let { data }: PageProps = $props();
-  let { categories, total } = $derived(data);
-  const LOCALSTORAGE_KEY = "categoria_filters";
+  let { themes, total } = $derived(data);
+  const LOCALSTORAGE_KEY = "tema_filters";
   let isLoading = $state(true);
   let url = new SvelteURL(page.url);
 
@@ -20,7 +20,7 @@
     if (activeParam) {
       saveToLocalStorage(LOCALSTORAGE_KEY, { active: activeParam });
       isLoading = false;
-      return;
+      return; 
     }
     const saved = loadFromLocalStorage(LOCALSTORAGE_KEY) as { active: string } | null;
     if (saved) {
@@ -38,7 +38,7 @@
 
   $effect(() => {
     const active = url.searchParams.get("active");
-
+    
     if (active) {
       saveToLocalStorage(LOCALSTORAGE_KEY, { active });
     }
@@ -47,11 +47,11 @@
 
 <Breadcrumbs items={[
   { href: '/home', label: 'Home' },
-  { href: '/home/categoria', label: 'Categoria' }
+  { href: '/home/tema', label: 'Tema' }
 ]} />
 
 <Actions actions={[
-  { href: '/home/categoria/novo', label: 'Adicionar', class: 'btn-success' }
+  { href: '/home/tema/novo', label: 'Adicionar', class: 'btn-success' }
 ]} />
 
 <div class="w-full mt-5">
@@ -71,17 +71,17 @@
               <span class="loading loading-dots loading-sm"></span>
             </td>
           </tr>
-        {:else if categories.length === 0}
+        {:else if themes.length === 0}
           <tr>
             <td colspan="12" class="text-center">
-                Nenhuma categoria encontrada para o filtro selecionado
+                Nenhum tema encontrado para o filtro selecionado
             </td>
           </tr>
         {:else }
-          {#each categories as category}
-            <tr class={category.active ? "" : "line-through"}>
-              <td>{category.name}</td>
-              <td>{category.description}</td>
+          {#each themes as theme}
+            <tr class={theme.active ? "" : "line-through"}>
+              <td>{theme.name}</td>
+              <td>{theme.description}</td>
               <td>
                 <div class="dropdown dropdown-left">
                   <div tabindex="0" role="button" class="btn m-1">...</div>
@@ -93,7 +93,7 @@
                     <li>
                       <a
                         class="btn btn-success"
-                        href="/home/categoria/{category.id}">Editar
+                        href="/home/tema/{theme.id}">Editar
                       </a>
                     </li>
                   </ul>
@@ -106,9 +106,9 @@
     </table>
   </div>
   <UpdatePage
-    entityName="categoria"
-    displayItems={categories.length}
+    entityName="tema"
+    displayItems={themes.length}
     totalItems={total}
-    pluralName="categorias"
+    pluralName="temas"
   />
 </div>
