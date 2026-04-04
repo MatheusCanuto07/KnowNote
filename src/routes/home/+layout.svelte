@@ -1,14 +1,15 @@
 <script lang="ts">
-  import { Palette, Tag, FileText, Settings, House } from '@lucide/svelte';
+  import { Palette, Tag, FileText, Settings, House, Repeat2 } from '@lucide/svelte';
   import Toast from "$lib/components/toast/Toast.svelte"; 
 	let { data, children } = $props();
   let isOpen = $state(false);
 
   let telas = [
-    { label: "Home",          urlAtt: "/home",              Icon: House      },
+    { label: "Home",          urlAtt: "/home",               Icon: House    },
     { label: "Tema",          urlAtt: "/home/tema",          Icon: Palette  },
     { label: "Categoria",     urlAtt: "/home/categoria",     Icon: Tag      },
     { label: "Texto",         urlAtt: "/home/texto",         Icon: FileText },
+    { label: "Recordar",      urlAtt: "/home/recordar",      Icon: Repeat2  },
     { label: "Configurações", urlAtt: "/home/configuracoes", Icon: Settings },
   ];
 </script>

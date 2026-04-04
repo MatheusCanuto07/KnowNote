@@ -43,6 +43,27 @@
       "when": 1772982195451,
       "tag": "0005_superb_mantis",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1775315151244,
+      "tag": "0006_rich_stick",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1775315629337,
+      "tag": "0007_naive_microchip",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1775316500489,
+      "tag": "0008_melodic_marvel_boy",
+      "breakpoints": true
     }
   ]
 }

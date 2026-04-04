@@ -25,16 +25,16 @@
     errors?: FormErrors;
   } = $props();
 
-  let entidadeSnapshot = $state.snapshot(entidade);
-
-  let isNew = entidadeSnapshot === null;
+  let isNew = $derived(entidade === null);
   let isLoading = $state(false);
 
   let editorElement: HTMLElement;
   let editor: Editor;
-  let content = $state(entidadeSnapshot?.content ?? "");
+  let content = $state("");
 
   onMount(() => {
+    content = entidade?.content ?? "";
+
     editor = new Editor({
       extensions: [
         StarterKit,
@@ -135,6 +135,23 @@
       value={entidade?.name ?? ''}>
     {#if errors?.name}
       <span class="text-error text-sm">{errors.name}</span>
+    {/if}
+  </div>
+
+  <div class="w-full md:w-3/12 pr-5">
+    <label for="isReview">
+      <span class="label-text">Enviar para revisão <span class="text-red-500">*</span></span>
+      <select
+        name="isReview"
+        id="isReview"
+        class="select select-bordered w-full {errors?.isReview ? 'input-error' : ''}"
+        value={entidade?.isReview ? 'true' : 'false'}>
+        <option value="true">Sim</option>
+        <option value="false">Não</option>
+      </select>
+    </label>
+    {#if errors?.isReview}
+      <span class="text-error text-sm">{errors.isReview}</span>
     {/if}
   </div>
 

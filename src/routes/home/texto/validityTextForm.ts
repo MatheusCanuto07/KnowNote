@@ -9,12 +9,14 @@ export async function processTextForm(request: Request): Promise<FormResult> {
   const content = formData.get("content")?.toString() ?? "";
   const name = formData.get("name")?.toString() ?? "";
   const idCategory = formData.get("idCategory")?.toString() ?? "";
+  const isReviewRaw = formData.get("isReview")?.toString() ?? "";
 
   const errors: Record<string, string> = {};
 
   if (!content || content.length < 5) errors.content = "Conteúdo inválido (mínimo 5 caracteres)";
   if (!name || name.length < 3) errors.name = "Nome inválido (mínimo 3 caracteres)";
   if (!idCategory || isNaN(parseInt(idCategory))) errors.idCategory = "Categoria inválida";
+  if (!["true", "false"].includes(isReviewRaw)) errors.isReview = "Seleção de revisão inválida";
 
   if (Object.keys(errors).length > 0) {
     return { success: false, errors };
@@ -22,6 +24,11 @@ export async function processTextForm(request: Request): Promise<FormResult> {
 
   return {
     success: true,
-    data: { content, name, idCategory: parseInt(idCategory) } as TextType,
+    data: {
+      content,
+      name,
+      idCategory: parseInt(idCategory),
+      isReview: isReviewRaw === "true",
+    } as TextType,
   };
 }

@@ -9,4 +9,5 @@ export {
   themeTable,
   categoryTable,
   textTable,
+  vocabularyTable,
 } from './schema';

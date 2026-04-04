@@ -1,0 +1,1 @@
+ALTER TABLE `text` ADD `isReview` integer DEFAULT false NOT NULL;
